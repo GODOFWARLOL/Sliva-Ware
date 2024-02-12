@@ -1,0 +1,205 @@
+— silva ware —
+
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "Silva Ware",
+   LoadingTitle = "Loading...",
+   LoadingSubtitle = "by wh0ask3d aka TheRealAnimeFan",
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = true, -- Create a custom folder for your hub/game
+      FileName = "Silva Ware Beta"
+   },
+   Discord = {
+      Enabled = false,
+      Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
+      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+   },
+   KeySystem = true, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "Key is Here:https://workink.net/1TMc/lsi8rnag",
+      Subtitle = "Do the work.ink",
+      Note = "do the workink then copy the key in here",
+      FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = true, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"https://pastebin.com/raw/iMyaVYRk"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+   }
+})
+
+local MainTab = Window:CreateTab("Main",nil ) -- Title, Image
+local Section = MainTab:CreateSection("Combat")
+
+Rayfield:Notify({
+   Title = "Thanks For Using",
+   Content = "the best bedwars script",
+   Duration = 6.5,
+   Image = nil,
+   Actions = { -- Notification Buttons
+      Ignore = {
+         Name = "Okay!"what?",
+         Callback = function()
+         print("alr kid")
+      end
+   },
+},
+}
+
+local Button = Tab:CreateButton({
+   Name = "kill aura",
+   Callback = function()
+        -- Roblox Bed Wars Kill Aura Script
+-- This script allows the player to automatically attack nearby enemies in the game Bed Wars on Roblox.
+
+-- Create a new LocalScript object
+local script = Instance.new("LocalScript")
+
+-- Define the main function that will be executed when the LocalScript is run
+function main()
+    -- Check if the player's character exists
+    local character = script.Parent.Parent
+    if not character then
+        return
+    end
+
+    -- Check if the player's character has a humanoid
+    local humanoid = character:FindFirstChildOfClass("Humanoid")
+    if not humanoid then
+        return
+    end
+
+    -- Create a function to find nearby enemies
+    local function findEnemies()
+        local enemies = {}
+        for _, player in ipairs(game.Players:GetPlayers()) do
+            if player ~= game.Players.LocalPlayer and player.Character and player.Character:FindFirstChildOfClass("Humanoid") then
+                table.insert(enemies, player.Character)
+            end
+        end
+        return enemies
+    end
+
+    -- Create a function to attack enemies
+    local function attackEnemies()
+        while true do
+            wait(0.1) -- Adjust the delay between attacks if needed
+            local enemies = findEnemies()
+            for _, enemy in ipairs(enemies) do
+                humanoid:ChangeState(Enum.HumanoidStateType.StrafingNoPhysics)
+                humanoid:MoveTo(enemy.Head.Position)
+                humanoid:ChangeState(Enum.HumanoidStateType.None)
+                humanoid:ChangeState(Enum.HumanoidStateType.StrafingNoPhysics)
+                humanoid:MoveTo(enemy.Head.Position)
+                humanoid:ChangeState(Enum.HumanoidStateType.None)
+            end
+        end
+    end
+
+    -- Call the attackEnemies function to start the kill aura
+    attackEnemies()
+end
+
+-- Connect the main function to the LocalScript's "Loaded" event
+script.Loaded:Connect(main)
+
+-- Set the Parent of the LocalScript to the StarterPlayerScripts service
+script.Parent = game:GetService("StarterPlayer").StarterPlayerScripts
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Reach",
+   Callback = function()
+        -- This function will create a script that allows the player to have increased reach in Roblox Bed Wars.
+-- @param player: The player object for whom the reach script is being created.
+-- @return: Returns the reach script as a string.
+function createReachScript(player)
+    -- Create a new script with the player's name as the script's name
+    local script = Instance.new("Script")
+    script.Name = player.Name .. "_ReachScript"
+
+    -- Create a remote event to handle the reach functionality
+    local remoteEvent = Instance.new("RemoteEvent")
+    remoteEvent.Name = "ReachEvent"
+    remoteEvent.Parent = script
+
+    -- Create a function that will be called when the remote event is fired
+    local function onReachEventFired(targetPlayer, distance)
+        -- Check if the target player is the same as the player who fired the event
+        if targetPlayer == player then
+            -- Set the player's reach distance to the specified distance
+            player.Character.Humanoid.MaxHealth = distance
+        end
+    end
+
+    -- Connect the function to the remote event
+    remoteEvent.OnServerEvent:Connect(onReachEventFired)
+
+    -- Return the script as a string
+    return script:GetFullName()
+end
+
+-- Example usage of the createReachScript function
+
+-- Usage Example: Create a reach script for a player named "Player1"
+local player1 = game.Players:FindFirstChild("Player1")
+if player1 then
+    local reachScript = createReachScript(player1)
+    print("Reach script created for Player1:", reachScript)
+else
+    print("Player1 not found.")
+end
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Instant kill",
+   Callback = function()
+        -- This function creates a script that instantly kills players on hit in a Roblox Bed Wars game.
+-- @param bedWarsScript: The script that will be modified to include the kill functionality.
+-- @return: Returns the modified script with the kill functionality.
+function createBedWarsScript(bedWarsScript)
+    -- Check if the provided script is valid
+    if type(bedWarsScript) ~= "string" then
+        error("Invalid script provided.")
+    end
+
+    -- Find the place in the script where the player is hit
+    local hitIndex = string.find(bedWarsScript, "playerHitEvent")
+
+    -- Check if the player hit event is found in the script
+    if not hitIndex then
+        error("Player hit event not found in the script.")
+    end
+
+    -- Insert the kill functionality after the player hit event
+    local modifiedScript = string.sub(bedWarsScript, 1, hitIndex + 13) .. "\n" ..
+        "    -- Instantly kill the player\n" ..
+        "    player.Character.Humanoid.Health = 0\n" ..
+        string.sub(bedWarsScript, hitIndex + 14)
+
+    return modifiedScript
+end
+
+-- Example usage of the createBedWarsScript function
+
+-- Example script for a Roblox Bed Wars game
+local bedWarsScript = [[
+    -- Other code...
+
+    -- Player hit event
+    playerHitEvent:Connect(function(player)
+        -- Code to handle player hit event
+    end)
+
+    -- Other code...
+]]
+
+-- Create the modified script with the kill functionality
+local modifiedScript = createBedWarsScript(bedWarsScript)
+
+-- Print the modified script
+print(modifiedScript)
+   end,
+})
